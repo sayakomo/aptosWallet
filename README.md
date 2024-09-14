@@ -1,5 +1,5 @@
 # aptosWallet
-Creating multiple aptos wallet
+Creating multiple aptos wallet using reference [docs](https://www.npmjs.com/package/@okxweb3/coin-aptos)
 ## Install module
 ```
 npm install
