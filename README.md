@@ -1,15 +1,15 @@
 # aptosWallet
 Creating multiple aptos wallet using reference [docs](https://www.npmjs.com/package/@okxweb3/coin-aptos)
 ## Install module
-```
+```sh
 npm install
 ```
 ## Running script
-```
+```sh
 npm run komo
 ```
 or
-```
+```sh
 node aptos.js
 ```
 ## Example output
