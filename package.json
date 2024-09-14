@@ -1,0 +1,17 @@
+{
+  "name": "aptos",
+  "version": "1.0.0",
+  "main": "aptos.js",
+  "scripts": {
+    "komo": "node aptos.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@okxweb3/coin-aptos": "^1.0.9",
+    "bip39": "^3.1.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
