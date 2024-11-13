@@ -1,8 +1,8 @@
-const bip39 = require("bip39");
-const fs = require('fs');
-const path = require('path');
-const prompt = require('prompt-sync')({sigint: true});
-const { AptosWallet } = require("@okxweb3/coin-aptos");
+import bip39 from "bip39";
+import fs from "fs";
+import path from "path";
+import prompt from "prompt-sync";
+import { AptosWallet } from "@okxweb3/coin-aptos";
 
 class Wallet {
     constructor() {
