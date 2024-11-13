@@ -1,6 +1,6 @@
 {
   "name": "aptos",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "aptos.js",
   "type": "module",
   "scripts": {
