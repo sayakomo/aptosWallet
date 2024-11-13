@@ -2,6 +2,7 @@
   "name": "aptos",
   "version": "1.0.0",
   "main": "aptos.js",
+  "type": "module",
   "scripts": {
     "komo": "node aptos.js"
   },
