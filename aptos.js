@@ -18,7 +18,12 @@ class Wallet {
             mnemonic: mnemonic,
             hdPath: "m/44'/637'/0'/0'/0'"
         };
-        return await this.wallet.getDerivedPrivateKey(param);
+        try {
+            return await this.wallet.getDerivedPrivateKey(param);
+        } catch (error) {
+            console.error("Error getting private key:", error);
+            throw error;
+        }
     }
 
     async generateAddress(privateKey) {
@@ -26,11 +31,13 @@ class Wallet {
             privateKey,
             addressType: "short"
         };
-        const {address, publicKey} = await this.wallet.getNewAddress(param);
-        return this.isValidAddress(address) ? {
-            address,
-            publicKey
-        } : null;
+        try {
+            const { address, publicKey } = await this.wallet.getNewAddress(param);
+            return this.isValidAddress(address) ? { address, publicKey } : null;
+        } catch (error) {
+            console.error("Error generating address:", error);
+            throw error;
+        }
     }
 
     isValidAddress(address) {
@@ -42,12 +49,14 @@ class Wallet {
 
     async generate() {
         const mnemonic = this.generateMnemonic();
-        const privateKey = await this.getPrivateKey(mnemonic);
-        const walletInfo = await this.generateAddress(privateKey);
-        return walletInfo ? {
-            ... walletInfo,
-            mnemonic
-        } : null;
+        try {
+            const privateKey = await this.getPrivateKey(mnemonic);
+            const walletInfo = await this.generateAddress(privateKey);
+            return walletInfo ? { ...walletInfo, mnemonic } : null;
+        } catch (error) {
+            console.error("Error generating wallet:", error);
+            return null;
+        }
     }
 
     async createWallets(count) {
@@ -59,17 +68,20 @@ class Wallet {
             }
         }
 
-        const filePath = path.join(__dirname, 'wallets.json');
+        const filePath = path.join(process.cwd(), 'wallets.json');
         fs.writeFileSync(filePath, JSON.stringify(wallets, null, 2));
         console.log(`${wallets.length} wallets created and saved to ${filePath}`);
         return wallets;
     }
 }
-// komo
+//komo
 const wallet = new Wallet();
-const number = parseInt(prompt("Enter number of wallets to generate: "), 10);
+const promptSync = prompt();
+const number = parseInt(promptSync("Enter number of wallets to generate: "), 10);
 if (isNaN(number) || number <= 0) {
     console.error("Please enter a valid number greater than 0.");
 } else {
-    wallet.createWallets(number);
+    wallet.createWallets(number).catch(error => {
+        console.error("Error creating wallets:", error);
+    });
 }
